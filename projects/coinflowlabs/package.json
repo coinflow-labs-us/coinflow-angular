@@ -1,0 +1,26 @@
+{
+  "name": "@coinflowlabs/angular",
+  "version": "0.1.1",
+  "scripts": {
+    "clean": "rimraf ../../dist && rimraf ./src/lib/common",
+    "build": "npm run codegen && ng build coinflowlabs",
+    "codegen": "cp -r ../../../lib-common/src/ ./src/lib/common/"
+  },
+  "peerDependencies": {
+    "@angular/common": "^17.3.0",
+    "@angular/core": "^17.3.0",
+    "@coinflowlabs/lib-common": "*",
+    "@solana/web3.js": ">=1.54.0",
+    "bs58": "~5.0.0",
+    "lz-string": "^1.5.0"
+  },
+  "dependencies": {
+    "tslib": "^2.6.2"
+  },
+  "peerDependenciesMeta": {
+    "@coinflowlabs/lib-common": {
+      "optional": true
+    }
+  },
+  "sideEffects": false
+}
