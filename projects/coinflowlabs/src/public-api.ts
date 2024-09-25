@@ -8,3 +8,8 @@ export * from './lib/coinflow-purchase-history.component';
 export * from './lib/coinflow-purchase-protection.component';
 export * from './lib/coinflow-withdraw.component';
 export * from './lib/coinflow-withdraw-history.component';
+
+export * from './lib/card-form/coinflow-card-number-input.component';
+export * from './lib/card-form/coinflow-card-number-only-input.component';
+export * from './lib/card-form/coinflow-cvv-input.component';
+export * from './lib/card-form/coinflow-cvv-only-input.component';
