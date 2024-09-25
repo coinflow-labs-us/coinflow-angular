@@ -4,6 +4,8 @@ import {
   HostListener,
   Input,
   ViewChild,
+  Output,
+  EventEmitter,
 } from '@angular/core';
 import {
   CoinflowIFrameProps,
@@ -32,6 +34,8 @@ export class CoinflowIFrameComponent {
   @Input() iframeProps!: CoinflowIFrameProps;
   @Input() messageHandlers!: IFrameMessageHandlers;
 
+  @Output() messageEvent = new EventEmitter<any>();
+
   dynamicUrl?: SafeResourceUrl;
   @ViewChild('iframe') iframe?: ElementRef<HTMLIFrameElement>;
 
@@ -50,6 +54,8 @@ export class CoinflowIFrameComponent {
       )
     )
       return;
+
+    this.messageEvent.emit(event);
 
     const promise = handleIFrameMessage(event.data, this.messageHandlers);
     if (!promise) return;

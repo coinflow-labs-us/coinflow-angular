@@ -1,6 +1,6 @@
 {
   "name": "@coinflowlabs/angular",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "scripts": {
     "clean": "rimraf ../../dist && rimraf ./src/lib/common",
     "build": "npm run codegen && ng build coinflowlabs",

@@ -4,10 +4,13 @@ This library was generated with [Angular CLI](https://github.com/angular/angular
 
 # Changelog
 
+## 0.2.3
+
+- Added Apple & Google Pay buttons
+
 ## 0.2.1
 
 - Fixed Card Form Components export
-
 
 ## 0.2.0
 
