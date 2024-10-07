@@ -30,7 +30,7 @@ export class CoinflowPurchaseComponent {
     this.iframeProps = {
       ...this.purchaseProps,
       walletPubkey,
-      route: `/purchase/${this.purchaseProps?.merchantId}`,
+      route: `/purchase-v2/${this.purchaseProps?.merchantId}`,
       transaction: CoinflowUtils.getTransaction(this.purchaseProps),
     };
   }
