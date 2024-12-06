@@ -4,6 +4,14 @@ This library was generated with [Angular CLI](https://github.com/angular/angular
 
 # Changelog
 
+## 0.3.1
+
+- Added sessionKey authentication mechanism to `CoinflowWithdraw`
+
+## 0.3.0
+
+- Added sessionKey authentication mechanism to `CoinflowPurchase`
+
 ## 0.2.3
 
 - Added Apple & Google Pay buttons

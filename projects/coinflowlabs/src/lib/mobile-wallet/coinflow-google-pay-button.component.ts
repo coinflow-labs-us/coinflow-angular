@@ -23,5 +23,8 @@ import {CoinflowGooglePayOverlayComponent} from './google-pay-overlay.component'
   </lib-coinflow-mobile-wallet-button> `,
 })
 export class CoinflowGooglePayButtonComponent {
-  @Input() purchaseProps!: CoinflowPurchaseProps & {color: 'white' | 'black'};
+  @Input() purchaseProps!: CoinflowPurchaseProps & {
+    color: 'white' | 'black';
+    onError?: (message: string) => void;
+  };
 }

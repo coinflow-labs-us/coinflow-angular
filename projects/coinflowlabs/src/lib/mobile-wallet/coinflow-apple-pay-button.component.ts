@@ -53,7 +53,10 @@ import {CoinflowApplePayOverlayComponent} from './apple-pay-overlay.component';
   </lib-coinflow-mobile-wallet-button>`,
 })
 export class CoinflowApplePayButtonComponent {
-  @Input() purchaseProps!: CoinflowPurchaseProps & {color: 'white' | 'black'};
+  @Input() purchaseProps!: CoinflowPurchaseProps & {
+    color: 'white' | 'black';
+    onError?: (message: string) => void;
+  };
 
   fill() {
     return this.purchaseProps.color === 'white' ? '#000' : '#FFF';

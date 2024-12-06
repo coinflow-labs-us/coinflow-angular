@@ -69,11 +69,14 @@ export class MobileWalletsTestBenchComponent {
     },
   };
 
-  purchaseProps: CoinflowPurchaseProps & {color: 'black' | 'white'} = {
+  purchaseProps: CoinflowPurchaseProps & {
+    color: 'black' | 'white';
+    onError?: (message: string) => void;
+  } = {
     handleHeightChange: (height: string) => {
       this.height = height;
     },
-    env: 'staging',
+    env: 'local',
     amount: 1,
     blockchain: 'solana',
     merchantId: 'paysafe',
@@ -82,6 +85,9 @@ export class MobileWalletsTestBenchComponent {
     color: 'white',
     theme: {
       background: '#0f172a',
+    },
+    onError: (message: string) => {
+      console.log(`ANGULAR on error ${message}`);
     },
   };
 }

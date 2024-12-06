@@ -34,7 +34,11 @@ import {
   </div>`,
 })
 export class CoinflowMobileWalletButtonComponent {
-  @Input() purchaseProps!: CoinflowPurchaseProps & {color: 'white' | 'black'};
+  @Input() purchaseProps!: CoinflowPurchaseProps & {
+    color: 'white' | 'black';
+    onError?: (message: string) => void;
+  };
+
   @Input() route!: string;
   @Input() overlayDisplayOverride: string | undefined;
   @Input() alignItems: string | undefined;
@@ -47,6 +51,12 @@ export class CoinflowMobileWalletButtonComponent {
   handleMessage({data}: {data: string}) {
     try {
       const res = JSON.parse(data);
+
+      console.log({data});
+      if ('method' in res && res.data.startsWith('ERROR')) {
+        this.purchaseProps.onError?.(res.info);
+        return;
+      }
 
       if ('method' in res && res.method === 'loaded') {
         this.opacity = 1;
