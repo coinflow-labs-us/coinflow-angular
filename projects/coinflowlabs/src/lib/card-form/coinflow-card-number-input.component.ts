@@ -1,4 +1,4 @@
-import {Component, inject, Input} from '@angular/core';
+import {Component, inject, Input, OnDestroy} from '@angular/core';
 import {
   CoinflowCardNumberInputProps,
   setTokenExScriptTag,
@@ -13,7 +13,7 @@ import {CardFormService} from './CardFormService';
   imports: [],
   template: '<div id="{{TokenExCardNumberIframeId}}"></div>',
 })
-export class CoinflowCardNumberInput {
+export class CoinflowCardNumberInput implements OnDestroy {
   private cardFormService = inject(CardFormService);
   @Input() args!: CoinflowCardNumberInputProps;
   private iframe: TokenExIframe | undefined = undefined;
@@ -31,11 +31,24 @@ export class CoinflowCardNumberInput {
       .catch(e => console.error(e));
   }
 
-  ngOnInit() {
+  private initializeTokenEx() {
     setTokenExScriptTag({
       env: this.args.env,
       setTokenExScriptLoaded: this.onScriptLoaded.bind(this),
     });
+  }
+
+  public reinitialize() {
+    this.iframe = undefined;
+    this.initializeTokenEx();
+  }
+
+  ngOnInit() {
+    this.initializeTokenEx();
+  }
+
+  ngOnDestroy() {
+    this.iframe = undefined;
   }
 
   tokenize() {

@@ -4,6 +4,10 @@ This library was generated with [Angular CLI](https://github.com/angular/angular
 
 # Changelog
 
+## 0.3.2
+
+- Added `reinitialize` method to `CoinflowCvvOnlyInputComponent`, `CoinflowCardNumberInput`, and `CoinflowCardNumberOnlyInput`
+
 ## 0.3.1
 
 - Added sessionKey authentication mechanism to `CoinflowWithdraw`
