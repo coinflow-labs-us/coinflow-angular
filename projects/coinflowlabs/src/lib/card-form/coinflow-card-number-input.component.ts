@@ -19,7 +19,6 @@ export class CoinflowCardNumberInput implements OnDestroy {
   private iframe: TokenExIframe | undefined = undefined;
 
   private onScriptLoaded() {
-    console.log('onScriptLoaded');
     this.cardFormService
       .initializeTokenExIframe(this.args.env, {
         css: JSON.stringify(this.args.css),
@@ -36,11 +35,6 @@ export class CoinflowCardNumberInput implements OnDestroy {
       env: this.args.env,
       setTokenExScriptLoaded: this.onScriptLoaded.bind(this),
     });
-  }
-
-  public reinitialize() {
-    this.iframe = undefined;
-    this.initializeTokenEx();
   }
 
   ngOnInit() {

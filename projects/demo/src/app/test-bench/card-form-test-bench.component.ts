@@ -2,28 +2,33 @@ import {Component, ViewChild} from '@angular/core';
 import {CoinflowCardNumberInputProps} from '../../../../coinflowlabs/src/lib/common';
 import {CoinflowCardNumberInput} from '../../../../coinflowlabs/src/lib/card-form/coinflow-card-number-input.component';
 import {CoinflowCvvInputComponent} from '../../../../coinflowlabs/src/lib/card-form/coinflow-cvv-input.component';
+import {CommonModule} from '@angular/common';
 
 @Component({
   selector: 'card-form-test-bench',
   standalone: true,
-  imports: [CoinflowCardNumberInput, CoinflowCvvInputComponent],
+  imports: [CoinflowCardNumberInput, CoinflowCvvInputComponent, CommonModule],
   template: `
     <div>
-      <div [style.height]="40 + 'px'">
-        <lib-coinflow-card-number-input
-          #child
-          [args]="cardNumberInputProps"
-        ></lib-coinflow-card-number-input>
+      <div *ngIf="visible">
+        <div [style.height]="40 + 'px'">
+          <lib-coinflow-card-number-input
+            #child
+            [args]="cardNumberInputProps"
+          ></lib-coinflow-card-number-input>
+        </div>
+        <div [style.height]="40 + 'px'">
+          <lib-coinflow-cvv-input></lib-coinflow-cvv-input>
+        </div>
+        <button (click)="onClick()">Tokenize</button>
       </div>
-      <div [style.height]="40 + 'px'">
-        <lib-coinflow-cvv-input></lib-coinflow-cvv-input>
-      </div>
-      <button (click)="onClick()">Tokenize</button>
+      <button (click)="changeVisible()">Show</button>
     </div>
   `,
 })
 export class CardFormTestBenchComponent {
   @ViewChild('child') child!: CoinflowCardNumberInput;
+  visible = true;
 
   cardNumberInputProps: CoinflowCardNumberInputProps = {
     env: 'staging',
@@ -46,5 +51,10 @@ export class CardFormTestBenchComponent {
   onClick() {
     console.log('onClick');
     this.child.tokenize().then(res => console.log(res));
+  }
+
+  // Optional: Test ngIf functionality
+  changeVisible() {
+    this.visible = !this.visible;
   }
 }
