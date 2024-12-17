@@ -4,6 +4,10 @@ This library was generated with [Angular CLI](https://github.com/angular/angular
 
 # Changelog
 
+## 0.3.5
+
+- Added cleanup code to handle arg changes in `CoinflowCvvOnlyInputComponent`
+
 ## 0.3.4
 
 - Added `reinitialize` method to `CoinflowCvvOnlyInputComponent`, `CoinflowCardNumberInput`, and `CoinflowCardNumberOnlyInput`

@@ -1,4 +1,10 @@
-import {Component, inject, Input, OnDestroy} from '@angular/core';
+import {
+  Component,
+  inject,
+  Input,
+  OnDestroy,
+  SimpleChanges,
+} from '@angular/core';
 import {
   CoinflowCvvOnlyInputProps,
   setTokenExScriptTag,
@@ -28,8 +34,18 @@ export class CoinflowCvvOnlyInputComponent implements OnDestroy {
         token: this.args.token,
         cardType: this.args.cardType,
       })
-      .then(iframe => (this.iframe = iframe))
+      .then(iframe => {
+        this.iframe = iframe;
+      })
       .catch(e => console.error(e));
+  }
+
+  private cleanup() {
+    if (this.iframe) {
+      const iframeElement = document.querySelector(`#${TokenExCvvContainerID}`);
+      if (iframeElement) iframeElement.innerHTML = '';
+      this.iframe = undefined;
+    }
   }
 
   private initializeTokenEx() {
@@ -39,9 +55,17 @@ export class CoinflowCvvOnlyInputComponent implements OnDestroy {
     });
   }
 
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.args && !changes.args.firstChange) {
+      this.reinitialize();
+    }
+  }
+
   public reinitialize() {
-    this.iframe = undefined;
-    this.initializeTokenEx();
+    this.cleanup();
+    setTimeout(() => {
+      this.initializeTokenEx();
+    }, 500);
   }
 
   ngOnInit() {
