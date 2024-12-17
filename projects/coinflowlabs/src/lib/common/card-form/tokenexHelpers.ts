@@ -62,7 +62,9 @@ export function setTokenExScriptTag({
   setTokenExScriptLoaded: (b: boolean) => void;
 }) {
   const scriptTagId = 'tokenex-script';
-  if (document.head.querySelector(`#${scriptTagId}`)) return;
+  if (document.head.querySelector(`#${scriptTagId}`)) {
+    setTokenExScriptLoaded(true);
+  }
 
   const sdkScriptTag = document.createElement('script');
   sdkScriptTag.src =

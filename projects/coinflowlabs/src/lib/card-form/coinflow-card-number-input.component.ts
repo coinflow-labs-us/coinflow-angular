@@ -37,6 +37,11 @@ export class CoinflowCardNumberInput implements OnDestroy {
     });
   }
 
+  public reinitialize() {
+    this.iframe = undefined;
+    this.initializeTokenEx();
+  }
+
   ngOnInit() {
     this.initializeTokenEx();
   }

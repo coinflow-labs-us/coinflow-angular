@@ -23,6 +23,7 @@ import {CommonModule} from '@angular/common';
         <button (click)="onClick()">Tokenize</button>
       </div>
       <button (click)="changeVisible()">Show</button>
+      <button (click)="reinitialize()">Reinitialize</button>
     </div>
   `,
 })
@@ -51,6 +52,10 @@ export class CardFormTestBenchComponent {
   onClick() {
     console.log('onClick');
     this.child.tokenize().then(res => console.log(res));
+  }
+
+  reinitialize() {
+    this.child.reinitialize();
   }
 
   // Optional: Test ngIf functionality
