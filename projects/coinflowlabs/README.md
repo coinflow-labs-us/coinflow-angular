@@ -4,6 +4,46 @@ This library was generated with [Angular CLI](https://github.com/angular/angular
 
 # Changelog
 
+## 1.0.2
+
+- Added `allowedPaymentMethods` to `CoinflowPurchase`
+- Options are:
+  - 'card' = Credit and debit cards
+  - 'ach' = ACH bank account transfers
+  - 'fasterPayments' = UK Faster Payments (GBP Bank Transfers)
+  - 'sepa' = SEPA bank account transfers (EUR Bank Transfers)
+  - 'pix' = Pix bank account transfers (BRL Bank Transfers)
+  - 'usdc' = USDC
+  - 'googlePay' = Google Pay
+  - 'applePay' = Apple Pay
+  - 'credits' = Credits
+
+## 1.0.1
+
+- Allow copy to clipboard for Coinflow Iframe
+
+## 1.0.0
+
+- Deprecating `amount` and `token` in favor of subtotal which can be accessed via the following ways:
+- Added multi-currency support for presentment
+- SEPA and UK Faster Payments support
+
+```js
+{
+  cents: number;
+  currency: 'USD' | 'EUR' | 'GBP' | 'BRL';
+}
+```
+
+or
+
+```js
+{
+  address: string;
+  amount: number;
+}
+```
+
 ## 0.3.5
 
 - Added cleanup code to handle arg changes in `CoinflowCvvOnlyInputComponent`

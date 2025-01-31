@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 import {
   CoinflowCvvOnlyInputProps,
+  MerchantIdOrCheckoutJwt,
   setTokenExScriptTag,
   TokenExCvvContainerID,
   TokenExIframe,
@@ -21,18 +22,14 @@ import {CardFormService} from './CardFormService';
 })
 export class CoinflowCvvOnlyInputComponent implements OnDestroy {
   private cardFormService = inject(CardFormService);
-  @Input() args!: CoinflowCvvOnlyInputProps;
+  @Input() args!: CoinflowCvvOnlyInputProps & MerchantIdOrCheckoutJwt;
   private iframe: TokenExIframe | undefined = undefined;
 
   private onScriptLoaded() {
     this.cardFormService
-      .initializeCvvOnlyTokenExIframe(this.args.env, {
+      .initializeCvvOnlyTokenExIframe({
+        ...this.args,
         css: JSON.stringify(this.args.css),
-        debug: this.args.debug,
-        origins: this.args.origins,
-        font: this.args.font,
-        token: this.args.token,
-        cardType: this.args.cardType,
       })
       .then(iframe => {
         this.iframe = iframe;

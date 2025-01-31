@@ -2,6 +2,7 @@ import {Component, ViewChild} from '@angular/core';
 import {
   CoinflowCvvOnlyInputProps,
   CardType,
+  MerchantIdOrCheckoutJwt,
 } from '../../../../coinflowlabs/src/lib/common';
 import {CommonModule} from '@angular/common';
 import {CoinflowCardNumberInput} from '../../../../coinflowlabs/src/lib/card-form/coinflow-card-number-input.component';
@@ -51,6 +52,8 @@ export class SavedCardFormTestBenchComponent {
     },
     token: this.cardToken,
     cardType: CardType.VISA,
+    origins: [window.location.origin],
+    merchantId: 'paysafe',
   };
 
   onClick() {

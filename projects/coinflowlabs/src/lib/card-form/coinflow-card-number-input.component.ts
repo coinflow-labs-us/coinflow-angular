@@ -1,6 +1,7 @@
 import {Component, inject, Input, OnDestroy} from '@angular/core';
 import {
   CoinflowCardNumberInputProps,
+  MerchantIdOrCheckoutJwt,
   setTokenExScriptTag,
   TokenExCardNumberIframeId,
   TokenExIframe,
@@ -15,16 +16,14 @@ import {CardFormService} from './CardFormService';
 })
 export class CoinflowCardNumberInput implements OnDestroy {
   private cardFormService = inject(CardFormService);
-  @Input() args!: CoinflowCardNumberInputProps;
+  @Input() args!: CoinflowCardNumberInputProps & MerchantIdOrCheckoutJwt;
   private iframe: TokenExIframe | undefined = undefined;
 
   private onScriptLoaded() {
     this.cardFormService
-      .initializeTokenExIframe(this.args.env, {
+      .initializeTokenExIframe({
+        ...this.args,
         css: JSON.stringify(this.args.css),
-        debug: this.args.debug,
-        origins: this.args.origins,
-        font: this.args.font,
       })
       .then(iframe => (this.iframe = iframe))
       .catch(e => console.error(e));

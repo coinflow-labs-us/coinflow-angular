@@ -24,7 +24,7 @@ import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
     height="100%"
     #iframe
     scrolling="{{ iframeProps?.handleHeightChange ? 'no' : 'yes' }}"
-    allow="payment;camera"
+    allow="payment;camera;clipboard-write"
     title="withdraw"
     frameBorder="0"
     [src]="dynamicUrl"

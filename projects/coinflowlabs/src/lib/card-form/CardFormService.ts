@@ -4,6 +4,7 @@ import {
   doInitializeTokenExIframe,
   TokenExIframe,
   CoinflowEnvs,
+  MerchantIdOrCheckoutJwt,
 } from '../common';
 import {Injectable} from '@angular/core';
 
@@ -25,16 +26,15 @@ export class CardFormService {
   }
 
   async initializeCvvOnlyTokenExIframe(
-    env: CoinflowEnvs,
     args: Omit<
       Parameters<typeof doInitializeCvvOnlyTokenExIframe>[0],
-      'env' | 'tokenExScriptLoaded' | 'setCachedToken' | 'setLoaded'
-    >
+      'tokenExScriptLoaded' | 'setCachedToken' | 'setLoaded'
+    > &
+      MerchantIdOrCheckoutJwt
   ) {
     const iframe = await doInitializeCvvOnlyTokenExIframe({
       ...args,
       tokenExScriptLoaded: true,
-      env,
       setCachedToken: this.setCachedToken.bind(this),
       setLoaded: this.setLoaded.bind(this),
     });
@@ -44,17 +44,16 @@ export class CardFormService {
   }
 
   async initializeTokenExIframe(
-    env: CoinflowEnvs,
     args: Omit<
       Parameters<typeof doInitializeTokenExIframe>[0],
-      'env' | 'tokenExScriptLoaded' | 'setCachedToken' | 'setLoaded'
-    >
+      'tokenExScriptLoaded' | 'setCachedToken' | 'setLoaded'
+    > &
+      MerchantIdOrCheckoutJwt
   ) {
     console.log('initializeTokenExIframe');
     const iframe = await doInitializeTokenExIframe({
       ...args,
       tokenExScriptLoaded: true,
-      env,
       setCachedToken: this.setCachedToken.bind(this),
       setLoaded: this.setLoaded.bind(this),
     });
@@ -66,16 +65,15 @@ export class CardFormService {
   }
 
   async initializeTokenExCardOnlyIframe(
-    env: CoinflowEnvs,
     args: Omit<
       Parameters<typeof doInitializeTokenExCardOnlyIframe>[0],
-      'env' | 'tokenExScriptLoaded' | 'setCachedToken' | 'setLoaded'
-    >
+      'tokenExScriptLoaded' | 'setCachedToken' | 'setLoaded'
+    > &
+      MerchantIdOrCheckoutJwt
   ) {
     const iframe = await doInitializeTokenExCardOnlyIframe({
       ...args,
       tokenExScriptLoaded: true,
-      env,
       setCachedToken: this.setCachedToken.bind(this),
       setLoaded: this.setLoaded.bind(this),
     });
