@@ -27,11 +27,14 @@ export class CoinflowPurchaseComponent {
     this.messageHandlers.handleHeightChange =
       this.purchaseProps.handleHeightChange;
 
+    const handleHeightChangeId = Math.random().toString(16).substring(2);
+
     this.iframeProps = {
       ...this.purchaseProps,
       walletPubkey,
       route: `/purchase-v2/${this.purchaseProps?.merchantId}`,
       transaction: CoinflowUtils.getTransaction(this.purchaseProps),
+      handleHeightChangeId,
     };
   }
 }

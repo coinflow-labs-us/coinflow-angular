@@ -26,11 +26,14 @@ export class CoinflowWithdrawComponent {
     this.messageHandlers.handleHeightChange =
       this.withdrawProps.handleHeightChange;
 
+    const handleHeightChangeId = Math.random().toString(16).substring(2);
+
     this.iframeProps = {
       ...this.withdrawProps,
       walletPubkey,
       route: `/withdraw/${this.withdrawProps?.merchantId}`,
       transaction: undefined,
+      handleHeightChangeId,
     };
   }
 }

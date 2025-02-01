@@ -23,7 +23,7 @@ import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
     width="100%"
     height="100%"
     #iframe
-    scrolling="{{ iframeProps?.handleHeightChange ? 'no' : 'yes' }}"
+    scrolling="{{ iframeProps?.handleHeightChangeId ? 'no' : 'yes' }}"
     allow="payment;camera;clipboard-write"
     title="withdraw"
     frameBorder="0"
@@ -57,7 +57,11 @@ export class CoinflowIFrameComponent {
 
     this.messageEvent.emit(event);
 
-    const promise = handleIFrameMessage(event.data, this.messageHandlers);
+    const promise = handleIFrameMessage(
+      event.data,
+      this.messageHandlers,
+      this.iframeProps.handleHeightChangeId
+    );
     if (!promise) return;
     promise
       .then(this.sendMessage.bind(this))

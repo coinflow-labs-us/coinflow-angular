@@ -34,7 +34,7 @@ export class SavedCardFormTestBenchComponent {
   visible = false;
   cardToken = '4000057YPB4M5556';
 
-  cardNumberInputProps: CoinflowCvvOnlyInputProps = {
+  cardNumberInputProps: CoinflowCvvOnlyInputProps & MerchantIdOrCheckoutJwt = {
     env: 'staging',
     debug: false,
     font: 'Figtree',

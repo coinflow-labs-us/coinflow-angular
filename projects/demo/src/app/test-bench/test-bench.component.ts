@@ -66,7 +66,7 @@ export class TestBenchComponent {
       this.purchaseHeight = height;
     },
     env: 'local',
-    amount: 1,
+    subtotal: {cents: 100},
     blockchain: 'solana',
     merchantId: 'paysafe',
     connection: new Connection('https://api.devnet.solana.com'),

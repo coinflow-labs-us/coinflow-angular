@@ -73,12 +73,15 @@ export class CoinflowMobileWalletButtonComponent {
     this.messageHandlers.handleHeightChange =
       this.purchaseProps.handleHeightChange;
 
+    const handleHeightChangeId = Math.random().toString(16).substring(2);
+
     this.iframeProps = {
       ...this.purchaseProps,
       walletPubkey,
       route: `/${this.route}/${this.purchaseProps?.merchantId}`,
       routePrefix: 'form',
       transaction: CoinflowUtils.getTransaction(this.purchaseProps),
+      handleHeightChangeId,
     };
   }
 }

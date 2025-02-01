@@ -44,6 +44,10 @@ or
 }
 ```
 
+## 0.3.6
+
+- Added 3DS Challenge Handling to the standalone Google Pay button
+
 ## 0.3.5
 
 - Added cleanup code to handle arg changes in `CoinflowCvvOnlyInputComponent`
