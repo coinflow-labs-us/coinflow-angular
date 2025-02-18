@@ -4,6 +4,10 @@ This library was generated with [Angular CLI](https://github.com/angular/angular
 
 # Changelog
 
+## 1.0.5
+
+- Fixing `onAuthDeclined` callback
+
 ## 1.0.4
 
 - Added `seller` prop to `chargebackProtectionData`
