@@ -28,6 +28,7 @@ import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
     title="withdraw"
     frameBorder="0"
     [src]="dynamicUrl"
+    credentialless
   ></iframe>`,
 })
 export class CoinflowIFrameComponent {
