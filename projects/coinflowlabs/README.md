@@ -4,6 +4,10 @@ This library was generated with [Angular CLI](https://github.com/angular/angular
 
 # Changelog
 
+## 1.0.7
+
+- Improving Withdraw With Session Keys
+
 ## 1.0.6
 
 - Add credentialless to iframe
