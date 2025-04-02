@@ -4,6 +4,10 @@ This library was generated with [Angular CLI](https://github.com/angular/angular
 
 # Changelog
 
+## 1.1.0
+
+- Added Multi-Currency Presentment via the `presentment` property
+
 ## 1.0.7
 
 - Improving Withdraw With Session Keys
