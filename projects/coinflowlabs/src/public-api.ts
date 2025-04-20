@@ -16,3 +16,5 @@ export * from './lib/card-form/coinflow-cvv-only-input.component';
 
 export * from './lib/mobile-wallet/coinflow-apple-pay-button.component';
 export * from './lib/mobile-wallet/coinflow-google-pay-button.component';
+
+export * from './lib/common/index';
