@@ -1,6 +1,4 @@
 import {Component, Input} from '@angular/core';
-import {CoinflowPurchaseProps, IFrameMessageHandlers} from '../common';
-import {CoinflowMobileWalletButtonComponent} from './coinflow-mobile-wallet-button.component';
 
 @Component({
   selector: 'coinflow-apple-pay-overlay',

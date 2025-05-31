@@ -1,17 +1,17 @@
 import {
   Component,
   ElementRef,
+  EventEmitter,
   HostListener,
   Input,
-  ViewChild,
   Output,
-  EventEmitter,
+  ViewChild,
 } from '@angular/core';
 import {
   CoinflowIFrameProps,
   CoinflowUtils,
-  IFrameMessageHandlers,
   handleIFrameMessage,
+  IFrameMessageHandlers,
 } from './common';
 import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
 

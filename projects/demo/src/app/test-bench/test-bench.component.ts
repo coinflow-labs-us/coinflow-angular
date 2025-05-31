@@ -65,7 +65,7 @@ export class TestBenchComponent {
     handleHeightChange: (height: string) => {
       this.purchaseHeight = height;
     },
-    env: 'local',
+    env: 'staging',
     subtotal: {cents: 100},
     blockchain: 'solana',
     merchantId: 'paysafe',
@@ -77,7 +77,7 @@ export class TestBenchComponent {
     handleHeightChange: (height: string) => {
       this.withdrawHeight = height;
     },
-    env: 'local',
+    env: 'staging',
     blockchain: 'solana',
     merchantId: 'paysafe',
     connection: new Connection('https://api.devnet.solana.com'),

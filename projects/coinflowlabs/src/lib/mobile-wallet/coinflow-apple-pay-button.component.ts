@@ -1,15 +1,11 @@
 import {Component, Input} from '@angular/core';
 import {CoinflowPurchaseProps} from '../common';
 import {CoinflowMobileWalletButtonComponent} from './coinflow-mobile-wallet-button.component';
-import {CoinflowApplePayOverlayComponent} from './apple-pay-overlay.component';
 
 @Component({
   selector: 'lib-coinflow-apple-pay-button',
   standalone: true,
-  imports: [
-    CoinflowMobileWalletButtonComponent,
-    CoinflowApplePayOverlayComponent,
-  ],
+  imports: [CoinflowMobileWalletButtonComponent],
   template: ` <lib-coinflow-mobile-wallet-button
     ng-if="iframeProps && messageHandlers"
     [purchaseProps]="purchaseProps"

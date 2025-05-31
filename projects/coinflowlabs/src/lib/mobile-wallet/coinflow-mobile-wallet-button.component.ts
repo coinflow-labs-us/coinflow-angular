@@ -3,10 +3,10 @@ import {CoinflowIFrameComponent} from '../coinflow-iframe.component';
 import {
   CoinflowIFrameProps,
   CoinflowPurchaseProps,
-  IFrameMessageHandlers,
+  CoinflowUtils,
   getHandlers,
   getWalletPubkey,
-  CoinflowUtils,
+  IFrameMessageHandlers,
 } from '../common';
 
 @Component({

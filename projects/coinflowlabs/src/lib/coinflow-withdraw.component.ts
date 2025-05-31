@@ -2,9 +2,9 @@ import {Component, Input} from '@angular/core';
 import {
   CoinflowIFrameProps,
   CoinflowWithdrawProps,
-  IFrameMessageHandlers,
   getHandlers,
   getWalletPubkey,
+  IFrameMessageHandlers,
 } from './common';
 import {CoinflowIFrameComponent} from './coinflow-iframe.component';
 

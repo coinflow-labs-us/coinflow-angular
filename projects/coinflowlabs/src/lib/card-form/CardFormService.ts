@@ -2,9 +2,8 @@ import {
   doInitializeCvvOnlyTokenExIframe,
   doInitializeTokenExCardOnlyIframe,
   doInitializeTokenExIframe,
-  TokenExIframe,
-  CoinflowEnvs,
   MerchantIdOrCheckoutJwt,
+  TokenExIframe,
 } from '../common';
 import {Injectable} from '@angular/core';
 
