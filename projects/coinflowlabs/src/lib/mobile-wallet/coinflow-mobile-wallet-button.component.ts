@@ -8,6 +8,7 @@ import {
   getWalletPubkey,
   IFrameMessageHandlers,
 } from '../common';
+import {WithOnLoad} from '../../public-api';
 
 @Component({
   selector: 'lib-coinflow-mobile-wallet-button',
@@ -29,15 +30,18 @@ import {
         ng-if="iframeProps && messageHandlers"
         [iframeProps]="iframeProps!"
         [messageHandlers]="messageHandlers!"
+        [onLoad]="purchaseProps?.onLoad"
+        [waitForLoadedMessage]="true"
       ></lib-coinflow-iframe>
     </div>
   </div>`,
 })
 export class CoinflowMobileWalletButtonComponent {
-  @Input() purchaseProps!: CoinflowPurchaseProps & {
-    color: 'white' | 'black';
-    onError?: (message: string) => void;
-  };
+  @Input() purchaseProps!: CoinflowPurchaseProps &
+    WithOnLoad & {
+      color: 'white' | 'black';
+      onError?: (message: string) => void;
+    };
 
   @Input() route!: string;
   @Input() overlayDisplayOverride: string | undefined;

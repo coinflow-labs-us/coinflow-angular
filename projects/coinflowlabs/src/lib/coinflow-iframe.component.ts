@@ -29,16 +29,20 @@ import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
     frameBorder="0"
     [src]="dynamicUrl"
     credentialless
+    (load)="handleIframeLoad()"
   ></iframe>`,
 })
 export class CoinflowIFrameComponent {
   @Input() iframeProps!: CoinflowIFrameProps;
   @Input() messageHandlers!: IFrameMessageHandlers;
+  @Input() onLoad?: () => void | Promise<void>;
+  @Input() waitForLoadedMessage?: boolean;
 
   @Output() messageEvent = new EventEmitter<any>();
 
   dynamicUrl?: SafeResourceUrl;
   @ViewChild('iframe') iframe?: ElementRef<HTMLIFrameElement>;
+  private isLoading = true;
 
   constructor(private sanitizer: DomSanitizer) {}
 
@@ -58,6 +62,22 @@ export class CoinflowIFrameComponent {
 
     this.messageEvent.emit(event);
 
+    if (this.waitForLoadedMessage) {
+      try {
+        const message = JSON.parse(event.data);
+        if (
+          message &&
+          typeof message === 'object' &&
+          message.method === 'loaded'
+        ) {
+          this.isLoading = false;
+          this.onLoad?.();
+        }
+      } catch (error) {
+        // Ignore parse errors
+      }
+    }
+
     const promise = handleIFrameMessage(
       event.data,
       this.messageHandlers,
@@ -72,5 +92,12 @@ export class CoinflowIFrameComponent {
   sendMessage(message: string) {
     if (!this.iframe || !this.iframe.nativeElement) return;
     this.iframe.nativeElement.contentWindow!.postMessage(message, '*');
+  }
+
+  handleIframeLoad() {
+    if (this.waitForLoadedMessage) return;
+
+    this.isLoading = false;
+    this.onLoad?.();
   }
 }

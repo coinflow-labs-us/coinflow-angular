@@ -3,7 +3,8 @@ import {CoinflowPurchaseComponent} from '../../../../coinflowlabs/src/lib/coinfl
 import {
   CoinflowPurchaseProps,
   CoinflowWithdrawProps,
-} from '../../../../coinflowlabs/src/lib/common';
+  WithOnLoad,
+} from '../../../../coinflowlabs/src/public-api';
 import {
   Connection,
   Keypair,
@@ -61,7 +62,7 @@ export class TestBenchComponent {
     },
   };
 
-  purchaseProps: CoinflowPurchaseProps = {
+  purchaseProps: CoinflowPurchaseProps & WithOnLoad = {
     handleHeightChange: (height: string) => {
       this.purchaseHeight = height;
     },
@@ -73,7 +74,7 @@ export class TestBenchComponent {
     wallet: this.wallet,
   };
 
-  withdrawProps: CoinflowWithdrawProps = {
+  withdrawProps: CoinflowWithdrawProps & WithOnLoad = {
     handleHeightChange: (height: string) => {
       this.withdrawHeight = height;
     },

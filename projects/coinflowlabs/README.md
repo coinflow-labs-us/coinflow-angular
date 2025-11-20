@@ -4,6 +4,25 @@ This library was generated with [Angular CLI](https://github.com/angular/angular
 
 # Changelog
 
+## 1.3.1
+
+- Added `redemptionCheck` to purchase (Solana only)
+## 1.3.0
+
+- Added `allowedWithdrawSpeeds` query parameter to allow merchants to specify what withdraw speeds are allowed. The default is all.
+
+## 1.2.1
+
+- Added more `chargebackProtectionData` product types
+
+## 1.2.0
+
+- Added `partialUsdcChecked` property to pre-check partial USDC payment checkbox
+
+## 1.1.5
+
+- Added `onLoad` property
+
 ## 1.1.0
 
 - Added Multi-Currency Presentment via the `presentment` property

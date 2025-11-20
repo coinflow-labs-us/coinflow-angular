@@ -8,16 +8,17 @@ import {
   getWalletPubkey,
   IFrameMessageHandlers,
 } from './common';
+import {WithOnLoad} from '../public-api';
 
 @Component({
   selector: 'lib-coinflow-purchase',
   standalone: true,
   imports: [CoinflowIFrameComponent],
   template:
-    ' <lib-coinflow-iframe ng-if="iframeProps && messageHandlers" [iframeProps]="iframeProps!" [messageHandlers]="messageHandlers!"></lib-coinflow-iframe> ',
+    ' <lib-coinflow-iframe ng-if="iframeProps && messageHandlers" [iframeProps]="iframeProps!" [messageHandlers]="messageHandlers!" [onLoad]="purchaseProps?.onLoad" [waitForLoadedMessage]="true"></lib-coinflow-iframe> ',
 })
 export class CoinflowPurchaseComponent {
-  @Input() purchaseProps!: CoinflowPurchaseProps;
+  @Input() purchaseProps!: CoinflowPurchaseProps & WithOnLoad;
   iframeProps?: CoinflowIFrameProps;
   messageHandlers?: IFrameMessageHandlers;
 
