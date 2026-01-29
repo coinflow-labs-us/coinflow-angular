@@ -4,9 +4,18 @@ This library was generated with [Angular CLI](https://github.com/angular/angular
 
 # Changelog
 
+## 1.4.0
+
+- New Blockchain Support: The SDK now supports Monad, a high-performance EVM-compatible blockchain. Pass blockchain='monad' to enable Monad payment processing.
+
+## 1.3.2
+
+- Internal change to a query parameter name for zero authorization
+
 ## 1.3.1
 
 - Added `redemptionCheck` to purchase (Solana only)
+
 ## 1.3.0
 
 - Added `allowedWithdrawSpeeds` query parameter to allow merchants to specify what withdraw speeds are allowed. The default is all.
