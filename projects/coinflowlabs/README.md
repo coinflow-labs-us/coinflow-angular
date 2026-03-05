@@ -4,6 +4,10 @@ This library was generated with [Angular CLI](https://github.com/angular/angular
 
 # Changelog
 
+## 1.6.1
+
+- Added support for custom pay-in fees via `customPayInFees` in the JWT token or URL parameters. This allows merchants to add custom fee line items (fixed or percentage-based) that are displayed during checkout.
+
 ## 1.6.0
 
 - New Blockchain Support: The SDK now supports Stellar, a fast and low-cost blockchain for payments. Pass blockchain='stellar' to enable Stellar payment processing.
