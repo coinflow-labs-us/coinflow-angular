@@ -4,6 +4,10 @@ This library was generated with [Angular CLI](https://github.com/angular/angular
 
 # Changelog
 
+## 1.7.1
+
+- Added support for overriding the default account type (from merchant settings) used for chargeback protection via `chargebackProtectionAccountType` in the URL parameters.
+
 ## 1.6.1
 
 - Added support for custom pay-in fees via `customPayInFees` in the JWT token or URL parameters. This allows merchants to add custom fee line items (fixed or percentage-based) that are displayed during checkout.
