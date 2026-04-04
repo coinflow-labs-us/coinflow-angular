@@ -4,12 +4,6 @@ This library was generated with [Angular CLI](https://github.com/angular/angular
 
 # Changelog
 
-## 1.8.0
-
-- New `CoinflowCardForm` component — simple card input with a single `tokenize()` call and full theme support
-- Added theme options for `fontSize`and placeholder text
-- Improved security for iframe communication
-
 ## 1.7.2
 
 - Fixed typing for sessionKey being not present when passing the wallet object
