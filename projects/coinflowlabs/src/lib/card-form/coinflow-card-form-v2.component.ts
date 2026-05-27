@@ -1,11 +1,12 @@
 import {
   Component,
   ElementRef,
+  HostListener,
   Input,
-  OnDestroy,
   OnInit,
   ViewChild,
 } from '@angular/core';
+import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
 import LZString from 'lz-string';
 import {
   CoinflowEnvs,
@@ -40,32 +41,30 @@ export interface CardFormTokenResponse {
     frameBorder="0"
     allow="payment"
     [style.width]="'100%'"
-    [style.height]="'60px'"
+    [style.height]="iframeHeight ? iframeHeight + 'px' : '60px'"
     [style.border]="'none'"
     [style.opacity]="loaded ? 1 : 0"
-    [style.transition]="'opacity 300ms linear'"
+    [style.transition]="'opacity 300ms linear, height 150ms ease-out'"
   ></iframe>`,
 })
-export class CoinflowCardForm implements OnInit, OnDestroy {
+export class CoinflowCardForm implements OnInit {
   @Input() args!: CardFormArgs;
   @ViewChild('cardFormIframe', {static: true})
   iframeRef!: ElementRef<HTMLIFrameElement>;
 
-  url = '';
+  url?: SafeResourceUrl;
   loaded = false;
-  private messageHandler: ((event: MessageEvent) => void) | undefined;
+  iframeHeight: number | null = null;
+
+  constructor(private sanitizer: DomSanitizer) {}
 
   ngOnInit() {
     this.buildUrl();
-    this.messageHandler = (event: MessageEvent) =>
-      this.handleMessage(event.data, event.origin);
-    window.addEventListener('message', this.messageHandler);
   }
 
-  ngOnDestroy() {
-    if (this.messageHandler) {
-      window.removeEventListener('message', this.messageHandler);
-    }
+  @HostListener('window:message', ['$event'])
+  onMessage(event: MessageEvent) {
+    this.handleMessage(event.data, event.origin);
   }
 
   private buildUrl() {
@@ -75,6 +74,7 @@ export class CoinflowCardForm implements OnInit, OnDestroy {
       baseUrl
     );
     iframeUrl.searchParams.append('merchantId', this.args.merchantId);
+    iframeUrl.searchParams.append('useHeightChange', 'true');
     if (this.args.theme) {
       iframeUrl.searchParams.append(
         'theme',
@@ -86,7 +86,9 @@ export class CoinflowCardForm implements OnInit, OnDestroy {
     if (this.args.token) {
       iframeUrl.searchParams.append('token', this.args.token);
     }
-    this.url = iframeUrl.toString();
+    this.url = this.sanitizer.bypassSecurityTrustResourceUrl(
+      iframeUrl.toString()
+    );
   }
 
   private handleMessage(data: string, origin: string) {
@@ -99,6 +101,11 @@ export class CoinflowCardForm implements OnInit, OnDestroy {
       if (parsed.method === IFrameMessageMethods.Loaded) {
         this.loaded = true;
         this.args.onLoad?.();
+      } else if (parsed.method === IFrameMessageMethods.HeightChange) {
+        const parsedHeight = Number(parsed.data);
+        if (Number.isFinite(parsedHeight) && parsedHeight > 0) {
+          this.iframeHeight = parsedHeight;
+        }
       }
     } catch {
       // not JSON
