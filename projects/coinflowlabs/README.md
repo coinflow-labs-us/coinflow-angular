@@ -4,6 +4,16 @@ This library was generated with [Angular CLI](https://github.com/angular/angular
 
 # Changelog
 
+## 1.11.0
+
+- Added `cardBackground` to `MerchantTheme` to control the inner card-entry surface independently of the outer canvas `background`
+- Added `placeholderColor` to `MerchantTheme` to control placeholder text color in card form inputs
+- Fixed the card brand icon being hidden when the card form reflows to a stacked two-row layout at narrow widths
+
+## 1.10.0
+
+- Fixed an issue with vertical spacing when resizing the page
+
 ## 1.8.0
 
 - New `CoinflowCardForm` component — simple card input with a single `tokenize()` call and full theme support
