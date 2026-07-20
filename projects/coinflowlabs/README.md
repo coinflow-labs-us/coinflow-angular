@@ -4,6 +4,10 @@ This library was generated with [Angular CLI](https://github.com/angular/angular
 
 # Changelog
 
+## 1.13.0
+
+- Added loading states to the `CoinflowCardForm`, `CoinflowCardNumberInput`, `CoinflowCvvOnlyInput` components
+
 ## 1.11.0
 
 - Added `cardBackground` to `MerchantTheme` to control the inner card-entry surface independently of the outer canvas `background`
