@@ -21,6 +21,8 @@ import {
   IFrameMessageMethods,
   INLINE_SKELETON_HEIGHT_PX,
   MerchantTheme,
+  OnInputErrorMethod,
+  OnInputValidMethod,
   SKELETON_BOX_STYLE,
   SKELETON_FADE_MS,
   SKELETON_LAYOUTS,
@@ -35,6 +37,16 @@ export interface CardFormArgs {
   variant: CardFormVariant;
   token?: string;
   onLoad?: () => void;
+  /**
+   * Called whenever a card field in the form shows a validation error to the
+   * user, with the field name and the displayed message.
+   */
+  onInputError?: OnInputErrorMethod;
+  /**
+   * Called when a card field that was showing a validation error stops showing
+   * it, with the field name.
+   */
+  onInputValid?: OnInputValidMethod;
 }
 
 export interface CardFormTokenResponse {
@@ -262,6 +274,10 @@ export class CoinflowCardForm implements OnInit, OnDestroy {
         if (Number.isFinite(parsedHeight) && parsedHeight > 0) {
           this.iframeHeight = parsedHeight;
         }
+      } else if (parsed.method === IFrameMessageMethods.InputError) {
+        void this.args.onInputError?.(parsed.info);
+      } else if (parsed.method === IFrameMessageMethods.InputValid) {
+        void this.args.onInputValid?.(parsed.info);
       }
     } catch {
       // not JSON
