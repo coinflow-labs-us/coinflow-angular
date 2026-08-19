@@ -1,4 +1,10 @@
-import {Component, Input} from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges,
+  SimpleChanges,
+  ViewChild,
+} from '@angular/core';
 import {CoinflowIFrameComponent} from '../coinflow-iframe.component';
 import {
   CoinflowIFrameProps,
@@ -7,6 +13,8 @@ import {
   getHandlers,
   getWalletPubkey,
   IFrameMessageHandlers,
+  IFrameMessageMethods,
+  Subtotal,
 } from '../common';
 import {WithOnLoad} from '../../public-api';
 
@@ -36,7 +44,7 @@ import {WithOnLoad} from '../../public-api';
     </div>
   </div>`,
 })
-export class CoinflowMobileWalletButtonComponent {
+export class CoinflowMobileWalletButtonComponent implements OnChanges {
   @Input() purchaseProps!: CoinflowPurchaseProps &
     WithOnLoad & {
       color: 'white' | 'black';
@@ -51,6 +59,16 @@ export class CoinflowMobileWalletButtonComponent {
 
   iframeProps?: CoinflowIFrameProps;
   messageHandlers?: IFrameMessageHandlers;
+
+  @ViewChild(CoinflowIFrameComponent)
+  private iframeComponent?: CoinflowIFrameComponent;
+
+  // The subtotal is pinned to its initial value in the iframe URL (built once
+  // in ngOnInit) so amount changes don't force a reload. Updates are instead
+  // sent to the running iframe via postMessage once it has loaded.
+  private loaded = false;
+  private lastSentSubtotal?: string;
+  private pendingSubtotal?: Subtotal;
 
   handleMessage({data}: {data: string}) {
     try {
@@ -67,11 +85,45 @@ export class CoinflowMobileWalletButtonComponent {
         setTimeout(() => {
           this.display = 'none';
         }, 2000);
+
+        this.loaded = true;
+        if (this.pendingSubtotal) {
+          const pendingSubtotal = this.pendingSubtotal;
+          this.pendingSubtotal = undefined;
+          this.sendSubtotalUpdate(pendingSubtotal);
+        }
       }
     } catch (e) {}
   }
 
+  ngOnChanges(changes: SimpleChanges) {
+    const purchasePropsChange = changes['purchaseProps'];
+    if (!purchasePropsChange || purchasePropsChange.firstChange) return;
+
+    const subtotal: Subtotal | undefined =
+      purchasePropsChange.currentValue?.subtotal;
+    if (!subtotal) return;
+
+    this.sendSubtotalUpdate(subtotal);
+  }
+
+  private sendSubtotalUpdate(subtotal: Subtotal) {
+    if (!this.loaded) {
+      this.pendingSubtotal = subtotal;
+      return;
+    }
+
+    const serializedSubtotal = JSON.stringify(subtotal);
+    if (this.lastSentSubtotal === serializedSubtotal) return;
+
+    this.lastSentSubtotal = serializedSubtotal;
+    this.iframeComponent?.sendMessage(
+      `${IFrameMessageMethods.UpdateSubtotal}:${serializedSubtotal}`
+    );
+  }
+
   ngOnInit() {
+    this.lastSentSubtotal = JSON.stringify(this.purchaseProps?.subtotal);
     const walletPubkey = getWalletPubkey(this.purchaseProps);
     this.messageHandlers = getHandlers(this.purchaseProps);
     this.messageHandlers.handleHeightChange =
