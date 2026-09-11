@@ -52,13 +52,15 @@ export class CoinflowIFrameComponent {
       this.sanitizer.bypassSecurityTrustResourceUrl(coinflowUrl);
   }
 
-  @HostListener('window:message', ['$event']) onPostMessage(event: any) {
-    if (
-      !event.origin.includes(
-        CoinflowUtils.getCoinflowBaseUrl(this.iframeProps.env)
-      )
-    )
-      return;
+  @HostListener('window:message', ['$event']) onPostMessage(
+    event: MessageEvent
+  ) {
+    const expectedOrigin = new URL(
+      CoinflowUtils.getCoinflowBaseUrl(this.iframeProps.env)
+    ).origin;
+    if (event.origin !== expectedOrigin) return;
+    // Only honor messages from this instance's own iframe.
+    if (event.source !== this.iframe?.nativeElement?.contentWindow) return;
 
     this.messageEvent.emit(event);
 
