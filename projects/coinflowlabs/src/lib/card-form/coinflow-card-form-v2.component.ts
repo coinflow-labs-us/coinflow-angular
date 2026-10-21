@@ -13,6 +13,7 @@ import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
 import LZString from 'lz-string';
 import {
   CardFormVariant,
+  CardType,
   CoinflowEnvs,
   CoinflowUtils,
   getSkeletonColors,
@@ -53,6 +54,9 @@ export interface CardFormTokenResponse {
   token: string;
   expMonth?: string;
   expYear?: string;
+  bin?: string;
+  lastFour?: string;
+  cardType?: CardType;
 }
 
 @Component({
