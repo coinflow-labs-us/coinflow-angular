@@ -4,6 +4,10 @@ This library was generated with [Angular CLI](https://github.com/angular/angular
 
 # Changelog
 
+## 2.0.0
+
+- **Breaking:** Removed the deprecated legacy card form components: `CoinflowCardNumberInput` (`lib-coinflow-card-number-input`), `CoinflowCardNumberOnlyInput` (`lib-coinflow-card-number-only-input`), `CoinflowCvvInputComponent` (`lib-coinflow-cvv-input`) and `CoinflowCvvOnlyInputComponent` (`lib-coinflow-cvv-only-input`). Use `CoinflowCardFormV2` instead.
+
 ## 1.13.0
 
 - Added loading states to the `CoinflowCardForm`, `CoinflowCardNumberInput`, `CoinflowCvvOnlyInput` components

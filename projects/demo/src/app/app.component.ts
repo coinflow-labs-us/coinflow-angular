@@ -1,9 +1,6 @@
 import {Component} from '@angular/core';
 import {TestBenchComponent} from './test-bench/test-bench.component';
-import {CardFormTestBenchComponent} from './test-bench/card-form-test-bench.component';
 import {CardFormV2TestBenchComponent} from './test-bench/card-form-v2-test-bench.component';
-import {SavedCardFormTestBenchComponent} from './test-bench/saved-card-form-test-bench.component';
-import {CardNumberOnlyTestBenchComponent} from './test-bench/card-number-only-test-bench.component';
 import {MobileWalletsTestBenchComponent} from './test-bench/mobile-wallets-test-bench.component';
 
 @Component({
@@ -11,10 +8,7 @@ import {MobileWalletsTestBenchComponent} from './test-bench/mobile-wallets-test-
   standalone: true,
   imports: [
     TestBenchComponent,
-    CardFormTestBenchComponent,
     CardFormV2TestBenchComponent,
-    SavedCardFormTestBenchComponent,
-    CardNumberOnlyTestBenchComponent,
     MobileWalletsTestBenchComponent,
   ],
   templateUrl: './app.component.html',
